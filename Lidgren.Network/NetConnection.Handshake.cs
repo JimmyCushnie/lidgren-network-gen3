@@ -205,7 +205,7 @@ namespace Lidgren.Network
 				{
 					if (om.LengthBytes + m_localHailMessage.LengthBytes > m_peerConfiguration.m_maximumTransmissionUnit - 10)
 						m_peer.ThrowOrLog("Hail message too large; can maximally be " + (m_peerConfiguration.m_maximumTransmissionUnit - 10 - om.LengthBytes));
-					om.Write(m_localHailMessage.Data, 0, m_localHailMessage.LengthBytes);
+					om.WriteRaw(m_localHailMessage.Data, 0, m_localHailMessage.LengthBytes);
 				}
 			}
 		}
@@ -311,7 +311,7 @@ namespace Lidgren.Network
 								appMsg.m_senderConnection = this;
 								appMsg.m_senderEndPoint = this.m_remoteEndPoint;
 								if (m_remoteHailMessage != null)
-									appMsg.Write(m_remoteHailMessage.m_data, 0, m_remoteHailMessage.LengthBytes);
+									appMsg.WriteRaw(m_remoteHailMessage.m_data, 0, m_remoteHailMessage.LengthBytes);
 								SetStatus(NetConnectionStatus.RespondedAwaitingApproval, "Awaiting approval");
 								m_peer.ReleaseMessage(appMsg);
 								return;

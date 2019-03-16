@@ -139,9 +139,9 @@ namespace Lidgren.Network
         }
 
 		/// <summary>
-		/// Writes all bytes in an array
+		/// Writes raw bytes
 		/// </summary>
-		public NetBuffer Write(byte[] source)
+		public NetBuffer WriteRaw(byte[] source)
 		{
 			if (source == null)
 				throw new ArgumentNullException("source");
@@ -155,7 +155,7 @@ namespace Lidgren.Network
 		/// <summary>
 		/// Writes the specified number of bytes from an array
 		/// </summary>
-		public NetBuffer Write(byte[] source, int offsetInBytes, int numberOfBytes)
+		public NetBuffer WriteRaw(byte[] source, int offsetInBytes, int numberOfBytes)
 		{
 			if (source == null)
 				throw new ArgumentNullException("source");
@@ -501,7 +501,7 @@ namespace Lidgren.Network
 			val[4] = val[3];
 			val[3] = tmp;
 #endif
-			Write(val);
+			WriteRaw(val);
             return this;
         }
 #endif
@@ -659,7 +659,7 @@ namespace Lidgren.Network
 			byte[] bytes = Encoding.UTF8.GetBytes(source);
 			EnsureBufferSize(m_bitLength + 8 + (bytes.Length * 8));
 			WriteVariableUInt32((uint)bytes.Length);
-			Write(bytes);
+			WriteRaw(bytes);
             return this;
         }
 
@@ -670,7 +670,7 @@ namespace Lidgren.Network
 		{
 			byte[] bytes = endPoint.Address.GetAddressBytes();
 			Write((byte)bytes.Length);
-			Write(bytes);
+			WriteRaw(bytes);
 			Write((ushort)endPoint.Port);
             return this;
         }
@@ -727,7 +727,7 @@ namespace Lidgren.Network
 		{
 			EnsureBufferSize(m_bitLength + (buffer.LengthBytes * 8));
 
-			Write(buffer.m_data, 0, buffer.LengthBytes);
+			WriteRaw(buffer.m_data, 0, buffer.LengthBytes);
 
 			// did we write excessive bits?
 			int bitsInLastByte = (buffer.m_bitLength % 8);

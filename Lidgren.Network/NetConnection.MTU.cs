@@ -105,7 +105,7 @@ namespace Lidgren.Network
 		{
 			NetOutgoingMessage om = m_peer.CreateMessage(size);
 			byte[] tmp = new byte[size];
-			om.Write(tmp);
+			om.WriteRaw(tmp);
 			om.m_messageType = NetMessageType.ExpandMTURequest;
 			int len = om.Encode(m_peer.m_sendBuffer, 0, 0);
 
