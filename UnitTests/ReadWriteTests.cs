@@ -141,7 +141,7 @@ namespace UnitTests
 			// test aligned WriteBytes/ReadBytes
 			msg = peer.CreateMessage();
 			byte[] tmparr = new byte[] { 5, 6, 7, 8, 9 };
-			msg.Write(tmparr);
+			msg.WriteRaw(tmparr);
 
 			inc = Program.CreateIncomingMessage(msg.Data, msg.LengthBits);
 			byte[] result = inc.ReadBytes(tmparr.Length);

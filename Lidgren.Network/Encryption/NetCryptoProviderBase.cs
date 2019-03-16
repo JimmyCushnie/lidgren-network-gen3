@@ -47,7 +47,7 @@ namespace Lidgren.Network
 			msg.EnsureBufferSize((arr.Length + 4) * 8);
 			msg.LengthBits = 0; // reset write pointer
 			msg.Write((uint)unEncLenBits);
-			msg.Write(arr);
+			msg.WriteRaw(arr);
 			msg.LengthBits = (arr.Length + 4) * 8;
 
 			return true;
