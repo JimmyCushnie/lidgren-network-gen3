@@ -17,7 +17,6 @@ namespace Lidgren.Network
 			return new Vector2(
 				x: ReadSingle(),
 				y: ReadSingle());
-            return this;
 		}
 
 		public NetBuffer Write(Vector3 vector)
